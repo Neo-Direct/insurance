@@ -601,6 +601,75 @@
       max-width: 600px;
     }
 
+    /* ── CONSULTANT IMAGE ──────────────────────────────── */
+    .consultant-img-wrap {
+      margin: 28px 0 32px;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      box-shadow:
+        0 0 0 1px rgba(200,150,62,0.25),
+        0 20px 52px rgba(0,0,0,0.4);
+    }
+
+    .consultant-img-wrap::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--sky));
+      z-index: 2;
+    }
+
+    .consultant-img-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 45%;
+      background: linear-gradient(to top, rgba(11,31,58,0.55), transparent);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .consultant-img {
+      display: block;
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      object-position: center 20%;
+      transition: transform 0.6s ease;
+    }
+
+    .consultant-img-wrap:hover .consultant-img {
+      transform: scale(1.04);
+    }
+
+    .img-caption {
+      position: absolute;
+      bottom: 14px;
+      left: 16px;
+      right: 16px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .img-caption-dot {
+      width: 7px; height: 7px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s ease infinite;
+      flex-shrink: 0;
+    }
+
+    .img-caption-text {
+      font-size: 12px;
+      color: rgba(255,255,255,0.88);
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+
     /* ── RESPONSIVE ────────────────────────────────────── */
     @media (max-width: 960px) {
       .hero { grid-template-columns: 1fr; min-height: auto; }
@@ -609,6 +678,7 @@
       .features   { grid-template-columns: 1fr 1fr; padding: 40px 32px; gap: 24px; }
       .expat-banner { padding: 36px 32px; flex-direction: column; gap: 20px; }
       .lang-bar   { padding: 10px 24px; }
+      .consultant-img { height: 300px; }
     }
 
     @media (max-width: 600px) {
@@ -618,6 +688,12 @@
       .features   { grid-template-columns: 1fr; padding: 32px 20px; }
       .expat-banner { padding: 28px 20px; }
       .lang-btn .flag { display: none; }
+      .consultant-img { height: 200px; }
+      .consultant-img-wrap { border-radius: 14px; margin: 20px 0 24px; }
+    }
+
+    @media (min-width: 1200px) {
+      .consultant-img { height: 310px; }
     }
   </style>
 </head>
@@ -664,8 +740,22 @@
       Fully independent, no hidden costs.
     </p>
 
+    <!-- Consultant image -->
+    <div class="consultant-img-wrap">
+      <img
+        class="consultant-img"
+        src="Insurance_safe_consultancy.webp"
+        alt="neodirect insurance consultants advising an expat client"
+        loading="eager"
+        decoding="async"
+      />
+      <div class="img-caption">
+        <div class="img-caption-dot"></div>
+        <span class="img-caption-text" data-i18n="imgCaption">Expert advisors — real people, real guidance</span>
+      </div>
+    </div>
+
     <div class="expat-strip">
-      <span class="expat-label" data-i18n="expatLabel">Expats from</span>
       <div class="expat-flags">
         <span class="expat-flag" title="India">🇮🇳</span>
         <span class="expat-flag" title="USA">🇺🇸</span>
@@ -869,6 +959,7 @@
       headline:     "Insurance that<br/>actually works<br/><em>for expats.</em>",
       sub:          "Navigating German insurance as a foreigner is complex. We simplify it — comparing 300+ plans to find your perfect fit. Fully independent, no hidden costs.",
       expatLabel:   "Expats from",
+      imgCaption:   "Expert advisors — real people, real guidance",
       trust1: "Independent advice",    trust2: "No sales pressure",
       trust3: "GDPR compliant",        trust4: "Reply within 24h",
       formTitle:    "Get your free quote",
@@ -901,6 +992,7 @@
       headline:     "Versicherung, die<br/>wirklich zu<br/><em>Expats passt.</em>",
       sub:          "Als Ausländer in Deutschland die richtigen Versicherungen zu finden ist komplex. Wir machen es einfach – und vergleichen 300+ Tarife für Sie. Unabhängig, transparent, kostenlos.",
       expatLabel:   "Expats aus",
+      imgCaption:   "Echte Berater — persönlich und kompetent",
       trust1: "Unabhängige Beratung", trust2: "Kein Verkaufsdruck",
       trust3: "DSGVO-konform",        trust4: "Rückmeldung in 24h",
       formTitle:    "Angebot anfordern",
@@ -933,6 +1025,7 @@
       headline:     "बीमा जो<br/>सच में काम करे<br/><em>प्रवासियों के लिए।</em>",
       sub:          "विदेश में जर्मन बीमा समझना मुश्किल है। हम इसे आसान बनाते हैं — 300+ योजनाओं की तुलना करके आपके लिए सबसे उचित विकल्प खोजते हैं। पूरी तरह स्वतंत्र और बिल्कुल मुफ़्त।",
       expatLabel:   "प्रवासी",
+      imgCaption:   "विशेषज्ञ सलाहकार — असली लोग, सच्ची मार्गदर्शना",
       trust1: "स्वतंत्र सलाह",     trust2: "कोई बिक्री दबाव नहीं",
       trust3: "GDPR अनुपालन",      trust4: "24 घंटे में जवाब",
       formTitle:    "मुफ़्त कोटेशन पाएँ",
