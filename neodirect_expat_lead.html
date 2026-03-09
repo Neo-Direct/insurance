@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Insurance Consultation – neodirect</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0b1f3a;
+      --blue:    #1a4a8a;
+      --sky:     #2d7dd2;
+      --gold:    #c8963e;
+      --gold-lt: #f0d9a8;
+      --cream:   #faf8f4;
+      --white:   #ffffff;
+      --gray:    #6b7280;
+      --light:   #f1f4f9;
+      --border:  #d6dce8;
+      --red:     #dc2626;
+      --green:   #16a34a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', 'Noto Sans Devanagari', sans-serif;
+      background: var(--cream);
+      color: var(--navy);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Hindi font override */
+    body.lang-hi { font-family: 'Noto Sans Devanagari', 'DM Sans', sans-serif; }
+    body.lang-hi .hero-headline { font-family: 'Noto Sans Devanagari', serif; font-size: clamp(28px, 3.2vw, 44px); }
+    body.lang-hi .form-title { font-family: 'Noto Sans Devanagari', sans-serif; font-size: 22px; }
+    body.lang-hi .success-title { font-family: 'Noto Sans Devanagari', sans-serif; }
+
+    /* ── LANGUAGE BAR ──────────────────────────────────── */
+    .lang-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(11,31,58,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,150,62,0.15);
+      padding: 10px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .lang-bar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .lang-bar-logo {
+      width: 32px; height: 32px;
+      background: var(--gold);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .lang-bar-logo svg { width: 18px; height: 18px; fill: white; }
+
+    .lang-bar-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: white;
+      letter-spacing: -0.2px;
+    }
+
+    .lang-bar-name span { color: var(--gold); }
+
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 40px;
+      padding: 4px;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      border-radius: 30px;
+      padding: 6px 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .lang-btn .flag { font-size: 15px; line-height: 1; }
+
+    .lang-btn.active {
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    .lang-btn:hover:not(.active) { color: white; background: rgba(255,255,255,0.1); }
+
+    /* ── HERO ──────────────────────────────────────────── */
+    .hero {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+      padding-top: 56px; /* lang-bar height */
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 50%, rgba(45,125,210,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(200,150,62,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 520px; height: 520px;
+      border: 1px solid rgba(200,150,62,0.12);
+      border-radius: 50%;
+      animation: rotate 40s linear infinite;
+    }
+
+    /* Inner ring */
+    .ring2 {
+      position: absolute;
+      top: 40px; right: 40px;
+      width: 380px; height: 380px;
+      border: 1px solid rgba(45,125,210,0.12);
+      border-radius: 50%;
+      animation: rotate 28s linear infinite reverse;
+      pointer-events: none;
+    }
+
+    @keyframes rotate { to { transform: rotate(360deg); } }
+
+    .hero-left {
+      padding: 80px 60px 80px 80px;
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(200,150,62,0.15);
+      border: 1px solid rgba(200,150,62,0.3);
+      border-radius: 40px;
+      padding: 6px 16px;
+      color: var(--gold-lt);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s ease infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    .hero-headline {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(34px, 3.8vw, 52px);
+      line-height: 1.12;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .hero-headline em { font-style: italic; color: var(--gold); }
+
+    .hero-sub {
+      font-size: 16px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.62);
+      max-width: 430px;
+      margin-bottom: 40px;
+    }
+
+    /* Flags / expat countries strip */
+    .expat-strip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+
+    .expat-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    .expat-flags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .expat-flag {
+      font-size: 20px;
+      line-height: 1;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+      transition: transform 0.15s;
+      cursor: default;
+    }
+
+    .expat-flag:hover { transform: scale(1.2); }
+
+    .trust-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: rgba(255,255,255,0.5);
+      font-size: 13px;
+    }
+
+    .trust-item svg {
+      width: 15px; height: 15px;
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    /* ── FORM CARD ─────────────────────────────────────── */
+    .hero-right {
+      padding: 60px 80px 60px 40px;
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 0.9s 0.2s ease both;
+    }
+
+    .form-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 44px 42px;
+      box-shadow:
+        0 0 0 1px rgba(200,150,62,0.1),
+        0 24px 64px rgba(11,31,58,0.38),
+        0 4px 16px rgba(11,31,58,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold) 0%, var(--sky) 60%, #7c3aed 100%);
+    }
+
+    .form-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 26px;
+      color: var(--navy);
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .form-subtitle {
+      color: var(--gray);
+      font-size: 14px;
+      margin-bottom: 32px;
+      line-height: 1.55;
+    }
+
+    .field-group { margin-bottom: 18px; }
+
+    .field-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .field-label .req { color: var(--gold); }
+
+    .field-input {
+      width: 100%;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 13px 15px;
+      font-family: 'DM Sans', 'Noto Sans Devanagari', sans-serif;
+      font-size: 15px;
+      color: var(--navy);
+      background: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    .field-input::placeholder { color: #b0b8c8; }
+
+    .field-input:focus {
+      border-color: var(--sky);
+      box-shadow: 0 0 0 4px rgba(45,125,210,0.1);
+    }
+
+    .field-input.error {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(220,38,38,0.08);
+    }
+
+    .field-error {
+      display: none;
+      color: var(--red);
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .field-error.visible { display: block; }
+
+    /* Contact tabs */
+    .contact-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .tab-btn {
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray);
+      cursor: pointer;
+      background: transparent;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .tab-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
+    .tab-btn.active { border-color: var(--sky); background: rgba(45,125,210,0.06); color: var(--blue); }
+
+    /* Consent */
+    .consent-block {
+      margin: 20px 0 6px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .consent-checkbox { position: relative; flex-shrink: 0; margin-top: 2px; }
+
+    .consent-checkbox input[type="checkbox"] {
+      opacity: 0;
+      position: absolute;
+      width: 20px; height: 20px;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .checkbox-custom {
+      width: 20px; height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 5px;
+      background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s;
+      cursor: pointer;
+    }
+
+    .consent-checkbox input:checked + .checkbox-custom { background: var(--sky); border-color: var(--sky); }
+    .consent-checkbox input:checked + .checkbox-custom::after {
+      content: '';
+      display: block;
+      width: 5px; height: 9px;
+      border: 2px solid white;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg) translate(-1px,-1px);
+    }
+
+    .consent-checkbox.error .checkbox-custom { border-color: var(--red); }
+
+    .consent-text {
+      font-size: 12px;
+      line-height: 1.65;
+      color: var(--gray);
+    }
+
+    .consent-text a { color: var(--sky); text-decoration: none; border-bottom: 1px solid rgba(45,125,210,0.3); }
+    .consent-text a:hover { border-color: var(--sky); }
+
+    /* Submit */
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--sky) 100%);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      padding: 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 20px;
+      letter-spacing: 0.2px;
+    }
+
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 100%);
+    }
+
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,74,138,0.4); }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+    .btn-inner { display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-inner svg { width: 18px; height: 18px; stroke: white; fill: none; stroke-width: 2; stroke-linecap: round; }
+
+    .spinner {
+      display: none;
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading .spinner { display: block; }
+    .loading .btn-text { display: none; }
+
+    .badge-row { display: flex; gap: 12px; margin-top: 16px; justify-content: center; flex-wrap: wrap; }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: #94a3b8;
+      font-size: 11px;
+    }
+
+    .badge svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
+
+    /* ── SUCCESS ───────────────────────────────────────── */
+    .success-overlay {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background: var(--white);
+      border-radius: 24px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 48px 40px;
+      animation: fadeIn 0.4s ease both;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .success-overlay.show { display: flex; }
+
+    .success-icon {
+      width: 70px; height: 70px;
+      background: linear-gradient(135deg, #16a34a, #22c55e);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 24px rgba(22,163,74,0.28);
+      animation: pop 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+
+    @keyframes pop { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+    .success-icon svg { width: 30px; height: 30px; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    .success-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 26px;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .success-msg { color: var(--gray); font-size: 14px; line-height: 1.65; max-width: 290px; }
+
+    /* ── FEATURES ──────────────────────────────────────── */
+    .features {
+      background: var(--white);
+      border-top: 1px solid rgba(11,31,58,0.06);
+      padding: 52px 80px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+
+    .feature { display: flex; align-items: flex-start; gap: 14px; }
+
+    .feature-icon {
+      width: 42px; height: 42px;
+      background: var(--light);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .feature-icon svg { width: 20px; height: 20px; stroke: var(--blue); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .feature-text h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+    .feature-text p  { font-size: 13px; color: var(--gray); line-height: 1.55; }
+
+    /* ── EXPAT INFO BANNER ─────────────────────────────── */
+    .expat-banner {
+      background: linear-gradient(135deg, var(--navy) 0%, #1a3a6a 100%);
+      padding: 40px 80px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .expat-banner-icon {
+      font-size: 48px;
+      flex-shrink: 0;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    }
+
+    .expat-banner-text h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: white;
+      margin-bottom: 8px;
+    }
+
+    .expat-banner-text p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      max-width: 600px;
+    }
+
+    /* ── RESPONSIVE ────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left  { padding: 60px 32px 40px; }
+      .hero-right { padding: 0 32px 60px; }
+      .features   { grid-template-columns: 1fr 1fr; padding: 40px 32px; gap: 24px; }
+      .expat-banner { padding: 36px 32px; flex-direction: column; gap: 20px; }
+      .lang-bar   { padding: 10px 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-left  { padding: 48px 20px 32px; }
+      .hero-right { padding: 0 20px 48px; }
+      .form-card  { padding: 36px 24px; }
+      .features   { grid-template-columns: 1fr; padding: 32px 20px; }
+      .expat-banner { padding: 28px 20px; }
+      .lang-btn .flag { display: none; }
+    }
+  </style>
+</head>
+<body class="lang-en" id="body">
+
+<!-- ── LANGUAGE BAR ─────────────────────────────────────── -->
+<nav class="lang-bar">
+  <a class="lang-bar-brand" href="https://www.neodirect.de" target="_blank" rel="noopener">
+    <div class="lang-bar-logo">
+      <svg viewBox="0 0 24 24"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7z"/></svg>
+    </div>
+    <div class="lang-bar-name">neo<span>direct</span></div>
+  </a>
+
+  <div class="lang-switcher">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">
+      <span class="flag">🇬🇧</span> EN
+    </button>
+    <button class="lang-btn" id="btn-de" onclick="setLang('de')">
+      <span class="flag">🇩🇪</span> DE
+    </button>
+    <button class="lang-btn" id="btn-hi" onclick="setLang('hi')">
+      <span class="flag">🇮🇳</span> हिं
+    </button>
+  </div>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="ring2"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow" data-i18n="eyebrow">Free Expert Consultation</div>
+
+    <h1 class="hero-headline" data-i18n="headline">
+      Insurance that<br/>
+      actually works<br/>
+      <em>for expats.</em>
+    </h1>
+
+    <p class="hero-sub" data-i18n="sub">
+      Navigating German insurance as a foreigner is complex. 
+      We simplify it — comparing 300+ plans to find your perfect fit. 
+      Fully independent, no hidden costs.
+    </p>
+
+    <div class="expat-strip">
+      <span class="expat-label" data-i18n="expatLabel">Expats from</span>
+      <div class="expat-flags">
+        <span class="expat-flag" title="India">🇮🇳</span>
+        <span class="expat-flag" title="USA">🇺🇸</span>
+        <span class="expat-flag" title="UK">🇬🇧</span>
+        <span class="expat-flag" title="Turkey">🇹🇷</span>
+        <span class="expat-flag" title="Poland">🇵🇱</span>
+        <span class="expat-flag" title="Italy">🇮🇹</span>
+        <span class="expat-flag" title="Spain">🇪🇸</span>
+        <span class="expat-flag" title="France">🇫🇷</span>
+        <span class="expat-flag" title="China">🇨🇳</span>
+        <span class="expat-flag" title="Brazil">🇧🇷</span>
+        <span class="expat-flag" title="and more">🌍</span>
+      </div>
+    </div>
+
+    <div class="trust-strip">
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        <span data-i18n="trust1">Independent advice</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        <span data-i18n="trust2">No sales pressure</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        <span data-i18n="trust3">GDPR compliant</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        <span data-i18n="trust4">Reply within 24h</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="hero-right">
+    <div class="form-card" id="formCard">
+
+      <h2 class="form-title" data-i18n="formTitle">Get your free quote</h2>
+      <p class="form-subtitle" data-i18n="formSub">Leave your details — our team gets back to you within one business day.</p>
+
+      <form id="leadForm" novalidate>
+
+        <!-- Name -->
+        <div class="field-group">
+          <label class="field-label" for="name">
+            <span data-i18n="labelName">Your Name</span> <span class="req">*</span>
+          </label>
+          <input class="field-input" type="text" id="name" name="name"
+                 placeholder="First and last name" data-ph="phName" autocomplete="name" />
+          <div class="field-error" id="nameError" data-i18n="errName">Please enter your full name.</div>
+        </div>
+
+        <!-- Contact type -->
+        <div class="field-group">
+          <label class="field-label">
+            <span data-i18n="labelContact">Preferred Contact</span> <span class="req">*</span>
+          </label>
+          <div class="contact-tabs">
+            <button type="button" class="tab-btn active" data-type="tel" onclick="switchTab('tel')">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              <span data-i18n="tabPhone">Phone</span>
+            </button>
+            <button type="button" class="tab-btn" data-type="email" onclick="switchTab('email')">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span data-i18n="tabEmail">Email</span>
+            </button>
+          </div>
+
+          <div id="telWrapper">
+            <input class="field-input" type="tel" id="tel" name="tel"
+                   placeholder="+49 •  0XX XXXX XXXX" data-ph="phTel" autocomplete="tel" />
+            <div class="field-error" id="telError" data-i18n="errTel">Please enter a valid phone number.</div>
+          </div>
+
+          <div id="emailWrapper" style="display:none">
+            <input class="field-input" type="email" id="email" name="email"
+                   placeholder="your@email.com" data-ph="phEmail" autocomplete="email" />
+            <div class="field-error" id="emailError" data-i18n="errEmail">Please enter a valid email address.</div>
+          </div>
+        </div>
+
+        <!-- Consent -->
+        <div class="consent-block">
+          <div class="consent-checkbox" id="consentBox">
+            <input type="checkbox" id="consent" name="consent" />
+            <div class="checkbox-custom"></div>
+          </div>
+          <label class="consent-text" for="consent" data-i18n="consentText">
+            I agree that neodirect may process my personal data (name and contact information) 
+            to handle my enquiry and contact me. I may withdraw my consent at any time. 
+            For more information please see the 
+            <a href="https://www.neodirect.de/datenschutz" target="_blank" rel="noopener">Privacy Policy</a>.
+            <span style="color:var(--red)">*</span>
+          </label>
+        </div>
+        <div class="field-error" id="consentError" style="margin-top:-4px; margin-bottom:12px" data-i18n="errConsent">
+          Please accept the privacy policy to continue.
+        </div>
+
+        <button class="submit-btn" type="submit" id="submitBtn">
+          <div class="btn-inner">
+            <div class="spinner"></div>
+            <span class="btn-text" data-i18n="btnText">
+              Request free consultation
+              <svg viewBox="0 0 24 24" style="display:inline;margin-left:4px;vertical-align:middle"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </button>
+
+        <div class="badge-row">
+          <div class="badge">
+            <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            <span data-i18n="badgeSSL">SSL encrypted</span>
+          </div>
+          <div class="badge">
+            <svg viewBox="0 0 24 24"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7z"/></svg>
+            <span data-i18n="badgeGDPR">GDPR compliant</span>
+          </div>
+          <div class="badge">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span data-i18n="badge24h">Reply in 24h</span>
+          </div>
+        </div>
+      </form>
+
+      <!-- Success overlay -->
+      <div class="success-overlay" id="successOverlay">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="success-title" data-i18n="successTitle">Thank you!</div>
+        <p class="success-msg" data-i18n="successMsg">
+          Your request has been received. An advisor will contact you within one business day.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPAT BANNER ──────────────────────────────────────── -->
+<div class="expat-banner">
+  <div class="expat-banner-icon">🌍</div>
+  <div class="expat-banner-text">
+    <h3 data-i18n="bannerTitle">Trusted by expats across Germany</h3>
+    <p data-i18n="bannerText">
+      Whether you just arrived or have lived in Germany for years, understanding insurance can be overwhelming. 
+      Our advisors speak your language and explain everything clearly — so you're always fully covered and never overpaying.
+    </p>
+  </div>
+</div>
+
+<!-- ── FEATURES ──────────────────────────────────────────── -->
+<div class="features">
+  <div class="feature">
+    <div class="feature-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+    </div>
+    <div class="feature-text">
+      <h4 data-i18n="feat1h">Fast Response</h4>
+      <p data-i18n="feat1p">We call or email you within 24 hours on any working day.</p>
+    </div>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+    </div>
+    <div class="feature-text">
+      <h4 data-i18n="feat2h">Personal Advisor</h4>
+      <p data-i18n="feat2p">Real experts — no chatbots — analyse your specific expat needs.</p>
+    </div>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+    </div>
+    <div class="feature-text">
+      <h4 data-i18n="feat3h">100% Free</h4>
+      <p data-i18n="feat3p">Our consultation is completely non-binding and free of charge.</p>
+    </div>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">
+      <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    </div>
+    <div class="feature-text">
+      <h4 data-i18n="feat4h">300+ Plans Compared</h4>
+      <p data-i18n="feat4p">We scan all leading German insurers for the best value for you.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── TRANSLATIONS ───────────────────────────────────────
+  const T = {
+    en: {
+      pageTitle:    "Free Insurance Consultation – neodirect",
+      eyebrow:      "Free Expert Consultation",
+      headline:     "Insurance that<br/>actually works<br/><em>for expats.</em>",
+      sub:          "Navigating German insurance as a foreigner is complex. We simplify it — comparing 300+ plans to find your perfect fit. Fully independent, no hidden costs.",
+      expatLabel:   "Expats from",
+      trust1: "Independent advice",    trust2: "No sales pressure",
+      trust3: "GDPR compliant",        trust4: "Reply within 24h",
+      formTitle:    "Get your free quote",
+      formSub:      "Leave your details — our team gets back to you within one business day.",
+      labelName:    "Your Name",       phName:  "First and last name",
+      labelContact: "Preferred Contact",
+      tabPhone:     "Phone",           tabEmail: "Email",
+      phTel:        "+49 • 0XX XXXX XXXX",
+      phEmail:      "your@email.com",
+      errName:      "Please enter your full name.",
+      errTel:       "Please enter a valid phone number.",
+      errEmail:     "Please enter a valid email address.",
+      errConsent:   "Please accept the privacy policy to continue.",
+      consentText:  `I agree that neodirect may process my personal data (name and contact information) to handle my enquiry and contact me. I may withdraw my consent at any time. For more information please see the <a href="https://www.neodirect.de/datenschutz" target="_blank" rel="noopener">Privacy Policy</a>. <span style="color:var(--red)">*</span>`,
+      btnText:      "Request free consultation",
+      badgeSSL:     "SSL encrypted",   badgeGDPR: "GDPR compliant",  badge24h: "Reply in 24h",
+      successTitle: "Thank you!",
+      successMsg:   "Your request has been received. An advisor will contact you within one business day.",
+      bannerTitle:  "Trusted by expats across Germany",
+      bannerText:   "Whether you just arrived or have lived in Germany for years, understanding insurance can be overwhelming. Our advisors speak your language and explain everything clearly — so you're always fully covered and never overpaying.",
+      feat1h: "Fast Response",   feat1p: "We call or email you within 24 hours on any working day.",
+      feat2h: "Personal Advisor",feat2p: "Real experts — no chatbots — analyse your specific expat needs.",
+      feat3h: "100% Free",       feat3p: "Our consultation is completely non-binding and free of charge.",
+      feat4h: "300+ Plans Compared", feat4p: "We scan all leading German insurers for the best value for you.",
+    },
+
+    de: {
+      pageTitle:    "Kostenlose Versicherungsberatung – neodirect",
+      eyebrow:      "Kostenlose Erstberatung",
+      headline:     "Versicherung, die<br/>wirklich zu<br/><em>Expats passt.</em>",
+      sub:          "Als Ausländer in Deutschland die richtigen Versicherungen zu finden ist komplex. Wir machen es einfach – und vergleichen 300+ Tarife für Sie. Unabhängig, transparent, kostenlos.",
+      expatLabel:   "Expats aus",
+      trust1: "Unabhängige Beratung", trust2: "Kein Verkaufsdruck",
+      trust3: "DSGVO-konform",        trust4: "Rückmeldung in 24h",
+      formTitle:    "Angebot anfordern",
+      formSub:      "Einfach Kontaktdaten hinterlassen – unser Team meldet sich innerhalb eines Werktages.",
+      labelName:    "Ihr Name",        phName: "Vor- und Nachname",
+      labelContact: "Kontaktart",
+      tabPhone:     "Telefon",         tabEmail: "E-Mail",
+      phTel:        "+49 • 0XX XXXX XXXX",
+      phEmail:      "ihre@email.de",
+      errName:      "Bitte geben Sie Ihren Namen ein.",
+      errTel:       "Bitte geben Sie eine gültige Telefonnummer ein.",
+      errEmail:     "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      errConsent:   "Bitte stimmen Sie der Datenschutzerklärung zu.",
+      consentText:  `Ich stimme zu, dass neodirect meine personenbezogenen Daten (Name und Kontaktinformation) zur Bearbeitung meiner Anfrage verarbeitet und mich kontaktiert. Ich kann die Einwilligung jederzeit widerrufen. Weitere Informationen in der <a href="https://www.neodirect.de/datenschutz" target="_blank" rel="noopener">Datenschutzerklärung</a>. <span style="color:var(--red)">*</span>`,
+      btnText:      "Kostenlos anfragen",
+      badgeSSL:     "SSL-verschlüsselt", badgeGDPR: "DSGVO-konform", badge24h: "Antwort in 24h",
+      successTitle: "Vielen Dank!",
+      successMsg:   "Ihre Anfrage ist bei uns eingegangen. Ein Berater meldet sich innerhalb eines Werktages bei Ihnen.",
+      bannerTitle:  "Vertrauen von Expats in ganz Deutschland",
+      bannerText:   "Ob frisch angekommen oder schon seit Jahren in Deutschland – Versicherungen zu verstehen kann überwältigend sein. Unsere Berater erklären alles klar und verständlich, damit Sie immer optimal versichert sind.",
+      feat1h: "Schnelle Rückmeldung", feat1p: "Wir rufen Sie innerhalb von 24 Stunden an oder schreiben Ihnen.",
+      feat2h: "Persönliche Beratung", feat2p: "Echte Experten – kein Chatbot – analysieren Ihren Bedarf.",
+      feat3h: "100 % kostenlos",      feat3p: "Unsere Beratung ist völlig unverbindlich und kostenfrei.",
+      feat4h: "300+ Tarife verglichen", feat4p: "Wir scannen alle führenden Anbieter für das beste Preis-Leistungs-Verhältnis.",
+    },
+
+    hi: {
+      pageTitle:    "मुफ़्त बीमा परामर्श – neodirect",
+      eyebrow:      "मुफ़्त विशेषज्ञ परामर्श",
+      headline:     "बीमा जो<br/>सच में काम करे<br/><em>प्रवासियों के लिए।</em>",
+      sub:          "विदेश में जर्मन बीमा समझना मुश्किल है। हम इसे आसान बनाते हैं — 300+ योजनाओं की तुलना करके आपके लिए सबसे उचित विकल्प खोजते हैं। पूरी तरह स्वतंत्र और बिल्कुल मुफ़्त।",
+      expatLabel:   "प्रवासी",
+      trust1: "स्वतंत्र सलाह",     trust2: "कोई बिक्री दबाव नहीं",
+      trust3: "GDPR अनुपालन",      trust4: "24 घंटे में जवाब",
+      formTitle:    "मुफ़्त कोटेशन पाएँ",
+      formSub:      "अपनी संपर्क जानकारी छोड़ें — हमारी टीम एक कार्यदिवस में आपसे संपर्क करेगी।",
+      labelName:    "आपका नाम",     phName: "पूरा नाम",
+      labelContact: "संपर्क माध्यम",
+      tabPhone:     "फ़ोन",         tabEmail: "ईमेल",
+      phTel:        "+49 • 0XX XXXX XXXX",
+      phEmail:      "आपका@ईमेल.com",
+      errName:      "कृपया अपना पूरा नाम दर्ज करें।",
+      errTel:       "कृपया एक वैध फ़ोन नंबर दर्ज करें।",
+      errEmail:     "कृपया एक वैध ईमेल पता दर्ज करें।",
+      errConsent:   "जारी रखने के लिए कृपया गोपनीयता नीति स्वीकार करें।",
+      consentText:  `मैं सहमत हूँ कि neodirect मेरे व्यक्तिगत डेटा (नाम और संपर्क जानकारी) को मेरी जाँच और संपर्क के लिए प्रोसेस कर सकता है। मैं कभी भी यह सहमति वापस ले सकता/सकती हूँ। अधिक जानकारी के लिए <a href="https://www.neodirect.de/datenschutz" target="_blank" rel="noopener">गोपनीयता नीति</a> देखें। <span style="color:var(--red)">*</span>`,
+      btnText:      "मुफ़्त परामर्श अनुरोध करें",
+      badgeSSL:     "SSL एन्क्रिप्टेड", badgeGDPR: "GDPR अनुपालन", badge24h: "24h में जवाब",
+      successTitle: "धन्यवाद!",
+      successMsg:   "आपका अनुरोध प्राप्त हो गया है। एक सलाहकार एक कार्यदिवस के भीतर आपसे संपर्क करेगा।",
+      bannerTitle:  "जर्मनी के प्रवासियों का भरोसेमंद साथी",
+      bannerText:   "चाहे आप अभी-अभी आए हों या सालों से जर्मनी में हों — बीमा समझना भारी पड़ सकता है। हमारे सलाहकार सब कुछ साफ़ समझाते हैं ताकि आप हमेशा पूरी तरह सुरक्षित रहें।",
+      feat1h: "त्वरित जवाब",      feat1p: "हम किसी भी कार्यदिवस पर 24 घंटों में आपसे संपर्क करते हैं।",
+      feat2h: "व्यक्तिगत सलाहकार", feat2p: "असली विशेषज्ञ — कोई chatbot नहीं — आपकी ज़रूरतें समझते हैं।",
+      feat3h: "100% मुफ़्त",       feat3p: "हमारी परामर्श सेवा पूरी तरह बिना किसी शुल्क और बाध्यता के है।",
+      feat4h: "300+ योजनाओं की तुलना", feat4p: "हम आपके लिए सर्वश्रेष्ठ मूल्य खोजने के लिए सभी अग्रणी बीमाकर्ताओं को स्कैन करते हैं।",
+    },
+  };
+
+  let currentLang = 'en';
+  let activeTab = 'tel';
+
+  function setLang(lang) {
+    currentLang = lang;
+    const body = document.getElementById('body');
+    body.className = `lang-${lang}`;
+    document.documentElement.lang = lang;
+
+    // Update active lang button
+    ['en','de','hi'].forEach(l => {
+      document.getElementById(`btn-${l}`).classList.toggle('active', l === lang);
+    });
+
+    const t = T[lang];
+    document.title = t.pageTitle;
+
+    // Update all data-i18n elements
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) {
+        if (key === 'headline' || key === 'consentText') {
+          el.innerHTML = t[key];
+        } else {
+          el.textContent = t[key];
+        }
+      }
+    });
+
+    // Update placeholders
+    document.querySelectorAll('[data-ph]').forEach(el => {
+      const key = el.getAttribute('data-ph');
+      if (t[key]) el.placeholder = t[key];
+    });
+  }
+
+  // Tab switcher
+  function switchTab(type) {
+    activeTab = type;
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.type === type);
+    });
+    document.getElementById('telWrapper').style.display   = type === 'tel'   ? 'block' : 'none';
+    document.getElementById('emailWrapper').style.display = type === 'email' ? 'block' : 'none';
+    clearErrors();
+  }
+
+  function clearErrors() {
+    document.querySelectorAll('.field-error').forEach(el => el.classList.remove('visible'));
+    document.querySelectorAll('.field-input').forEach(el => el.classList.remove('error'));
+    document.getElementById('consentBox').classList.remove('error');
+  }
+
+  function validate() {
+    let valid = true;
+    clearErrors();
+    const t = T[currentLang];
+
+    const name = document.getElementById('name').value.trim();
+    if (name.length < 2) {
+      document.getElementById('nameError').textContent = t.errName;
+      document.getElementById('nameError').classList.add('visible');
+      document.getElementById('name').classList.add('error');
+      valid = false;
+    }
+
+    if (activeTab === 'tel') {
+      const tel = document.getElementById('tel').value.trim();
+      if (!/^[\d\s\+\-\(\)]{7,20}$/.test(tel)) {
+        document.getElementById('telError').textContent = t.errTel;
+        document.getElementById('telError').classList.add('visible');
+        document.getElementById('tel').classList.add('error');
+        valid = false;
+      }
+    } else {
+      const email = document.getElementById('email').value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        document.getElementById('emailError').textContent = t.errEmail;
+        document.getElementById('emailError').classList.add('visible');
+        document.getElementById('email').classList.add('error');
+        valid = false;
+      }
+    }
+
+    if (!document.getElementById('consent').checked) {
+      document.getElementById('consentError').textContent = t.errConsent;
+      document.getElementById('consentError').classList.add('visible');
+      document.getElementById('consentBox').classList.add('error');
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  document.getElementById('leadForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (!validate()) return;
+
+    const btn = document.getElementById('submitBtn');
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    const leadData = {
+      name:      document.getElementById('name').value.trim(),
+      contact:   activeTab === 'tel'
+                   ? document.getElementById('tel').value.trim()
+                   : document.getElementById('email').value.trim(),
+      type:      activeTab,
+      language:  currentLang,
+      timestamp: new Date().toISOString(),
+      source:    'neodirect_expat_lead',
+    };
+
+    console.log('Lead captured:', leadData);
+
+    // Replace with your actual API endpoint:
+    // fetch('/api/leads', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(leadData) })
+
+    setTimeout(() => {
+      btn.classList.remove('loading');
+      // Update success text to current lang before showing
+      const t = T[currentLang];
+      document.querySelector('.success-title').textContent = t.successTitle;
+      document.querySelector('.success-msg').textContent   = t.successMsg;
+      document.getElementById('successOverlay').classList.add('show');
+    }, 1400);
+  });
+
+  // Init
+  setLang('en');
+</script>
+</body>
+</html>
