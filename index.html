@@ -1149,38 +1149,62 @@
   }
 
   document.getElementById('leadForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    if (!validate()) return;
+  e.preventDefault();
+  if (!validate()) return;
 
-    const btn = document.getElementById('submitBtn');
-    btn.classList.add('loading');
-    btn.disabled = true;
+  const btn = document.getElementById('submitBtn');
+  btn.classList.add('loading');
+  btn.disabled = true;
 
-    const leadData = {
-      name:      document.getElementById('name').value.trim(),
-      contact:   activeTab === 'tel'
-                   ? document.getElementById('tel').value.trim()
-                   : document.getElementById('email').value.trim(),
-      type:      activeTab,
-      language:  currentLang,
-      timestamp: new Date().toISOString(),
-      source:    'neodirect_expat_lead',
-    };
+  const firstname = document.getElementById('name').value.trim();
+  const tel       = document.getElementById('tel').value.trim();
+  const email     = document.getElementById('email').value.trim();
 
-    console.log('Lead captured:', leadData);
+  // Build fields array as HubSpot expects
+  const fields = [
+    { name: 'firstname',    value: firstname },                     // or 'name' if that's your property
+    { name: 'contact',      value: (activeTab === 'tel' ? tel : email) }, // your one-line "contact" field
+    { name: 'lead_language', value: currentLang },                  // custom property
+    { name: 'lead_date',     value: new Date().toISOString() },     // custom property
+    { name: 'lead_source',   value: 'neodirect_expat_lead_sunil' }, // custom property
+  ];
 
-    // Replace with your actual API endpoint:
-    // fetch('/api/leads', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(leadData) })
+  // HubSpot tracking cookie (optional)
+  const hutk = (document.cookie.match(/hubspotutk=([^;]+)/) || [])[1] || '';
 
-    setTimeout(() => {
-      btn.classList.remove('loading');
-      // Update success text to current lang before showing
+  const payload = {
+    fields,
+    context: {
+      hutk,
+      pageUri:  window.location.href,
+      pageName: document.title,
+    },
+  };
+
+  const portalId = '25480791';
+  const formGuid = 'f9231836-76da-40d9-b48d-8f1281a12faa';
+
+  fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error('Form submission failed');
+      return res.json();
+    })
+    .then(() => {
       const t = T[currentLang];
       document.querySelector('.success-title').textContent = t.successTitle;
       document.querySelector('.success-msg').textContent   = t.successMsg;
       document.getElementById('successOverlay').classList.add('show');
-    }, 1400);
-  });
+    })
+    .catch((err) => {
+      console.error('HubSpot form submission error:', err);
+      btn.disabled = false;
+      btn.classList.remove('loading');
+    });
+});
 
   // Init
   setLang('en');
