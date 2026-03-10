@@ -1170,15 +1170,19 @@
   ];
 
   // HubSpot tracking cookie (optional)
-  const hutk = (document.cookie.match(/hubspotutk=([^;]+)/) || [])[1] || '';
-
+  const hutkMatch = document.cookie.match(/hubspotutk=([^;]+)/);
+  const context = {
+    pageUri:  window.location.href,
+    pageName: document.title,
+  };
+  
+  if (hutkMatch && hutkMatch[1]) {
+    context.hutk = hutkMatch[1]; // only add if present
+  }
+  
   const payload = {
     fields,
-    context: {
-      hutk,
-      pageUri:  window.location.href,
-      pageName: document.title,
-    },
+    context,
   };
 
   const portalId = '25480791';
