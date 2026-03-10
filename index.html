@@ -1171,7 +1171,7 @@
   // Build fields array as HubSpot expects
   const fields = [
     { name: 'firstname',    value: firstname },                     // or 'name' if that's your property
-    { name: 'contact',      value: (activeTab === 'tel' ? tel : email) }, // your one-line "contact" field
+    { name: 'phone',      value: (activeTab === 'tel' ? tel : email) }, // your one-line "contact" field
     { name: 'email',        value: hubspotEmail },                               // standard Email property
     { name: 'lead_language', value: currentLang },                  // custom property
     { name: 'lead_date',     value: new Date().toISOString() },     // custom property
