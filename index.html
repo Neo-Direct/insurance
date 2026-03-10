@@ -1160,10 +1160,18 @@
   const tel       = document.getElementById('tel').value.trim();
   const email     = document.getElementById('email').value.trim();
 
+  // Decide what goes into HubSpot's standard Email property
+  const hubspotEmail =
+    activeTab === 'email' && email
+      ? email
+      : 'emailvonkunden@nicht.vorhanden';
+
+    
   // Build fields array as HubSpot expects
   const fields = [
     { name: 'firstname',    value: firstname },                     // or 'name' if that's your property
     { name: 'contact',      value: (activeTab === 'tel' ? tel : email) }, // your one-line "contact" field
+    { name: 'email',        value: hubspotEmail },                               // standard Email property
     { name: 'lead_language', value: currentLang },                  // custom property
     { name: 'lead_date',     value: new Date().toISOString() },     // custom property
     { name: 'lead_source',   value: 'neodirect_expat_lead_sunil' }, // custom property
