@@ -858,23 +858,23 @@
             <span data-i18n="labelContact">Preferred Contact</span> <span class="req">*</span>
           </label>
           <div class="contact-tabs">
-            <button type="button" class="tab-btn active" data-type="tel" onclick="switchTab('tel')">
-              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-              <span data-i18n="tabPhone">Phone</span>
-            </button>
-            <button type="button" class="tab-btn" data-type="email" onclick="switchTab('email')">
+            <button type="button" class="tab-btn active" data-type="email" onclick="switchTab('email')">
               <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               <span data-i18n="tabEmail">Email</span>
             </button>
+            <button type="button" class="tab-btn" data-type="tel" onclick="switchTab('tel')">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              <span data-i18n="tabPhone">Phone</span>
+            </button>
           </div>
 
-          <div id="telWrapper">
+          <div id="telWrapper" style="display:none">
             <input class="field-input" type="tel" id="tel" name="tel"
                    placeholder="+49 •  0XX XXXX XXXX" data-ph="phTel" autocomplete="tel" />
             <div class="field-error" id="telError" data-i18n="errTel">Please enter a valid phone number.</div>
           </div>
 
-          <div id="emailWrapper" style="display:none">
+          <div id="emailWrapper">
             <input class="field-input" type="email" id="email" name="email"
                    placeholder="your@email.com" data-ph="phEmail" autocomplete="email" />
             <div class="field-error" id="emailError" data-i18n="errEmail">Please enter a valid email address.</div>
@@ -1110,7 +1110,7 @@
   };
 
   let currentLang = 'en';
-  let activeTab = 'tel';
+  let activeTab = 'email';
 
   function setLang(lang) {
     currentLang = lang;
