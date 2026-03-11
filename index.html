@@ -122,7 +122,7 @@
       position: relative;
       overflow: hidden;
       min-height: 100vh;
-      padding-top: 56px; /* lang-bar height */
+      padding-top: 56px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
@@ -148,7 +148,6 @@
       animation: rotate 40s linear infinite;
     }
 
-    /* Inner ring */
     .ring2 {
       position: absolute;
       top: 40px; right: 40px;
@@ -221,7 +220,6 @@
       margin-bottom: 40px;
     }
 
-    /* Flags / expat countries strip */
     .expat-strip {
       display: flex;
       align-items: center;
@@ -368,7 +366,6 @@
 
     .field-error.visible { display: block; }
 
-    /* Contact tabs */
     .contact-tabs {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -397,7 +394,6 @@
     .tab-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
     .tab-btn.active { border-color: var(--sky); background: rgba(45,125,210,0.06); color: var(--blue); }
 
-    /* Consent */
     .consent-block {
       margin: 20px 0 6px;
       display: flex;
@@ -447,7 +443,6 @@
     .consent-text a { color: var(--sky); text-decoration: none; border-bottom: 1px solid rgba(45,125,210,0.3); }
     .consent-text a:hover { border-color: var(--sky); }
 
-    /* Submit */
     .submit-btn {
       width: 100%;
       background: linear-gradient(135deg, var(--blue) 0%, var(--sky) 100%);
@@ -641,9 +636,7 @@
       transition: transform 0.6s ease;
     }
 
-    .consultant-img-wrap:hover .consultant-img {
-      transform: scale(1.04);
-    }
+    .consultant-img-wrap:hover .consultant-img { transform: scale(1.04); }
 
     .img-caption {
       position: absolute;
@@ -696,6 +689,55 @@
     @media (min-width: 1200px) {
       .consultant-img { height: 310px; }
     }
+
+    /* ── FOOTER ────────────────────────────────────────── */
+    .site-footer {
+      background: var(--navy);
+      border-top: 1px solid rgba(200,150,62,0.12);
+      padding: 28px 40px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-brand { display: flex; align-items: center; gap: 9px; }
+
+    .footer-logo {
+      width: 28px; height: 28px;
+      background: var(--gold);
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .footer-logo svg { width: 16px; height: 16px; fill: white; }
+    .footer-brand-name { font-family: 'DM Serif Display', serif; font-size: 17px; color: white; }
+    .footer-brand-name span { color: var(--gold); }
+    .footer-links { display: flex; align-items: center; gap: 12px; }
+
+    .footer-link {
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: color 0.2s;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 1px;
+    }
+
+    .footer-link:hover { color: var(--gold); border-bottom-color: rgba(200,150,62,0.4); }
+    .footer-divider { color: rgba(255,255,255,0.2); font-size: 14px; }
+
+    @media (max-width: 600px) {
+      .site-footer { padding: 24px 20px; }
+      .footer-inner { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+    }
   </style>
 </head>
 <body class="lang-en" id="body">
@@ -708,7 +750,6 @@
     </div>
     <div class="lang-bar-name">neo<span>direct</span></div>
   </a>
-
   <div class="lang-switcher">
     <button class="lang-btn active" id="btn-en" onclick="setLang('en')">
       <span class="flag">🇬🇧</span> EN
@@ -736,8 +777,8 @@
     </h1>
 
     <p class="hero-sub" data-i18n="sub">
-      Navigating German insurance as a foreigner is complex. 
-      We simplify it — comparing 300+ plans to find your perfect fit. 
+      Navigating German insurance as a foreigner is complex.
+      We simplify it — comparing 300+ plans to find your perfect fit.
       Fully independent, no hidden costs.
     </p>
 
@@ -825,7 +866,6 @@
               <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               <span data-i18n="tabEmail">Email</span>
             </button>
-            
           </div>
 
           <div id="telWrapper">
@@ -848,9 +888,9 @@
             <div class="checkbox-custom"></div>
           </div>
           <label class="consent-text" for="consent" data-i18n="consentText">
-            I agree that neodirect may process my personal data (name and contact information) 
-            to handle my enquiry and contact me. I may withdraw my consent at any time. 
-            For more information please see the 
+            I agree that neodirect may process my personal data (name and contact information)
+            to handle my enquiry and contact me. I may withdraw my consent at any time.
+            For more information please see the
             <a href="https://www.neodirect.de/datenschutz" target="_blank" rel="noopener">Privacy Policy</a>.
             <span style="color:var(--red)">*</span>
           </label>
@@ -906,7 +946,7 @@
   <div class="expat-banner-text">
     <h3 data-i18n="bannerTitle">Trusted by expats across Germany</h3>
     <p data-i18n="bannerText">
-      Whether you just arrived or have lived in Germany for years, understanding insurance can be overwhelming. 
+      Whether you just arrived or have lived in Germany for years, understanding insurance can be overwhelming.
       Our advisors speak your language and explain everything clearly — so you're always fully covered and never overpaying.
     </p>
   </div>
@@ -952,15 +992,30 @@
   </div>
 </div>
 
+<!-- ── FOOTER ────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <svg viewBox="0 0 24 24"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7z"/></svg>
+      </div>
+      <span class="footer-brand-name">neo<span>direct</span></span>
+    </div>
+    <div class="footer-links">
+      <a href="https://neodirect.de/impressum" target="_blank" rel="noopener" class="footer-link" data-i18n="footerImprint">Imprint</a>
+      <span class="footer-divider">·</span>
+      <a href="https://neodirect.de/datenschutz" target="_blank" rel="noopener" class="footer-link" data-i18n="footerPrivacy">Privacy Policy</a>
+    </div>
+  </div>
+</footer>
+
 <script>
-  // ── TRANSLATIONS ───────────────────────────────────────
   const T = {
     en: {
       pageTitle:    "Free Insurance Consultation – neodirect",
       eyebrow:      "Free Expert Consultation",
       headline:     "Insurance that<br/>actually works<br/><em>for expats.</em>",
       sub:          "Navigating German insurance as a foreigner is complex. We simplify it — comparing 300+ plans to find your perfect fit. Fully independent, no hidden costs.",
-      expatLabel:   "Expats from",
       imgCaption:   "Expert advisors — real people, real guidance",
       trust1: "Independent advice",    trust2: "No sales pressure",
       trust3: "GDPR compliant",        trust4: "Reply within 24h",
@@ -982,18 +1037,17 @@
       successMsg:   "Your request has been received. An advisor will contact you within one business day.",
       bannerTitle:  "Trusted by expats across Germany",
       bannerText:   "Whether you just arrived or have lived in Germany for years, understanding insurance can be overwhelming. Our advisors speak your language and explain everything clearly — so you're always fully covered and never overpaying.",
-      feat1h: "Fast Response",   feat1p: "We call or email you within 24 hours on any working day.",
-      feat2h: "Personal Advisor",feat2p: "Real experts — no chatbots — analyse your specific expat needs.",
-      feat3h: "100% Free",       feat3p: "Our consultation is completely non-binding and free of charge.",
-      feat4h: "300+ Plans Compared", feat4p: "We scan all leading German insurers for the best value for you.",
+      feat1h: "Fast Response",        feat1p: "We call or email you within 24 hours on any working day.",
+      feat2h: "Personal Advisor",     feat2p: "Real experts — no chatbots — analyse your specific expat needs.",
+      feat3h: "100% Free",            feat3p: "Our consultation is completely non-binding and free of charge.",
+      feat4h: "300+ Plans Compared",  feat4p: "We scan all leading German insurers for the best value for you.",
+      footerImprint: "Imprint",       footerPrivacy: "Privacy Policy",
     },
-
     de: {
       pageTitle:    "Kostenlose Versicherungsberatung – neodirect",
       eyebrow:      "Kostenlose Erstberatung",
       headline:     "Versicherung, die<br/>wirklich zu<br/><em>Expats passt.</em>",
       sub:          "Als Ausländer in Deutschland die richtigen Versicherungen zu finden ist komplex. Wir machen es einfach – und vergleichen 300+ Tarife für Sie. Unabhängig, transparent, kostenlos.",
-      expatLabel:   "Expats aus",
       imgCaption:   "Echte Berater — persönlich und kompetent",
       trust1: "Unabhängige Beratung", trust2: "Kein Verkaufsdruck",
       trust3: "DSGVO-konform",        trust4: "Rückmeldung in 24h",
@@ -1019,14 +1073,13 @@
       feat2h: "Persönliche Beratung", feat2p: "Echte Experten – kein Chatbot – analysieren Ihren Bedarf.",
       feat3h: "100 % kostenlos",      feat3p: "Unsere Beratung ist völlig unverbindlich und kostenfrei.",
       feat4h: "300+ Tarife verglichen", feat4p: "Wir scannen alle führenden Anbieter für das beste Preis-Leistungs-Verhältnis.",
+      footerImprint: "Impressum",     footerPrivacy: "Datenschutz",
     },
-
     hi: {
       pageTitle:    "मुफ़्त बीमा परामर्श – neodirect",
       eyebrow:      "मुफ़्त विशेषज्ञ परामर्श",
       headline:     "बीमा जो<br/>सच में काम करे<br/><em>प्रवासियों के लिए।</em>",
       sub:          "विदेश में जर्मन बीमा समझना मुश्किल है। हम इसे आसान बनाते हैं — 300+ योजनाओं की तुलना करके आपके लिए सबसे उचित विकल्प खोजते हैं। पूरी तरह स्वतंत्र और बिल्कुल मुफ़्त।",
-      expatLabel:   "प्रवासी",
       imgCaption:   "विशेषज्ञ सलाहकार — असली लोग, सच्ची मार्गदर्शना",
       trust1: "स्वतंत्र सलाह",     trust2: "कोई बिक्री दबाव नहीं",
       trust3: "GDPR अनुपालन",      trust4: "24 घंटे में जवाब",
@@ -1048,10 +1101,11 @@
       successMsg:   "आपका अनुरोध प्राप्त हो गया है। एक सलाहकार एक कार्यदिवस के भीतर आपसे संपर्क करेगा।",
       bannerTitle:  "जर्मनी के प्रवासियों का भरोसेमंद साथी",
       bannerText:   "चाहे आप अभी-अभी आए हों या सालों से जर्मनी में हों — बीमा समझना भारी पड़ सकता है। हमारे सलाहकार सब कुछ साफ़ समझाते हैं ताकि आप हमेशा पूरी तरह सुरक्षित रहें।",
-      feat1h: "त्वरित जवाब",      feat1p: "हम किसी भी कार्यदिवस पर 24 घंटों में आपसे संपर्क करते हैं।",
+      feat1h: "त्वरित जवाब",       feat1p: "हम किसी भी कार्यदिवस पर 24 घंटों में आपसे संपर्क करते हैं।",
       feat2h: "व्यक्तिगत सलाहकार", feat2p: "असली विशेषज्ञ — कोई chatbot नहीं — आपकी ज़रूरतें समझते हैं।",
-      feat3h: "100% मुफ़्त",       feat3p: "हमारी परामर्श सेवा पूरी तरह बिना किसी शुल्क और बाध्यता के है।",
+      feat3h: "100% मुफ़्त",        feat3p: "हमारी परामर्श सेवा पूरी तरह बिना किसी शुल्क और बाध्यता के है।",
       feat4h: "300+ योजनाओं की तुलना", feat4p: "हम आपके लिए सर्वश्रेष्ठ मूल्य खोजने के लिए सभी अग्रणी बीमाकर्ताओं को स्कैन करते हैं।",
+      footerImprint: "इंप्रिंट",   footerPrivacy: "गोपनीयता नीति",
     },
   };
 
@@ -1060,19 +1114,13 @@
 
   function setLang(lang) {
     currentLang = lang;
-    const body = document.getElementById('body');
-    body.className = `lang-${lang}`;
+    document.getElementById('body').className = `lang-${lang}`;
     document.documentElement.lang = lang;
-
-    // Update active lang button
     ['en','de','hi'].forEach(l => {
       document.getElementById(`btn-${l}`).classList.toggle('active', l === lang);
     });
-
     const t = T[lang];
     document.title = t.pageTitle;
-
-    // Update all data-i18n elements
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (t[key] !== undefined) {
@@ -1083,15 +1131,12 @@
         }
       }
     });
-
-    // Update placeholders
     document.querySelectorAll('[data-ph]').forEach(el => {
       const key = el.getAttribute('data-ph');
       if (t[key]) el.placeholder = t[key];
     });
   }
 
-  // Tab switcher
   function switchTab(type) {
     activeTab = type;
     document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -1112,7 +1157,6 @@
     let valid = true;
     clearErrors();
     const t = T[currentLang];
-
     const name = document.getElementById('name').value.trim();
     if (name.length < 2) {
       document.getElementById('nameError').textContent = t.errName;
@@ -1120,7 +1164,6 @@
       document.getElementById('name').classList.add('error');
       valid = false;
     }
-
     if (activeTab === 'tel') {
       const tel = document.getElementById('tel').value.trim();
       if (!/^[\d\s\+\-\(\)]{7,20}$/.test(tel)) {
@@ -1138,87 +1181,74 @@
         valid = false;
       }
     }
-
     if (!document.getElementById('consent').checked) {
       document.getElementById('consentError').textContent = t.errConsent;
       document.getElementById('consentError').classList.add('visible');
       document.getElementById('consentBox').classList.add('error');
       valid = false;
     }
-
     return valid;
   }
 
   document.getElementById('leadForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  if (!validate()) return;
+    e.preventDefault();
+    if (!validate()) return;
 
-  const btn = document.getElementById('submitBtn');
-  btn.classList.add('loading');
-  btn.disabled = true;
+    const btn = document.getElementById('submitBtn');
+    btn.classList.add('loading');
+    btn.disabled = true;
 
-  const firstname = document.getElementById('name').value.trim();
-  const tel       = document.getElementById('tel').value.trim();
-  const email     = document.getElementById('email').value.trim();
+    const firstname = document.getElementById('name').value.trim();
+    const tel       = document.getElementById('tel').value.trim();
+    const email     = document.getElementById('email').value.trim();
 
-  // Decide what goes into HubSpot's standard Email property
-  const hubspotEmail =
-    activeTab === 'email' && email
-      ? email
-      : 'email@noexist.org';
-      //: 'emailvonkunden' + Date.now() + '@nichtvorhan.den';
+    const hubspotEmail =
+      activeTab === 'email' && email
+        ? email
+        : 'email@noexist.org';
 
-    
-  // Build fields array as HubSpot expects
-  const fields = [
-    { name: 'firstname',    value: firstname },                     // or 'name' if that's your property
-    { name: 'phone',      value: (activeTab === 'tel' ? tel : email) }, // your one-line "contact" field
-    { name: 'email',        value: hubspotEmail },                               // standard Email property
-    { name: 'lead_language', value: currentLang },                  // custom property
-    { name: 'lead_date',     value: new Date().toISOString() },     // custom property
-    { name: 'lead_source',   value: 'neodirect_expat_lead_sunil' }, // custom property
-  ];
+    const fields = [
+      { name: 'firstname',     value: firstname },
+      { name: 'phone',         value: (activeTab === 'tel' ? tel : email) },
+      { name: 'email',         value: hubspotEmail },
+      { name: 'lead_language', value: currentLang },
+      { name: 'lead_date',     value: new Date().toISOString() },
+      { name: 'lead_source',   value: 'neodirect_expat_lead_sunil' },
+    ];
 
-  // HubSpot tracking cookie (optional)
-  const hutkMatch = document.cookie.match(/hubspotutk=([^;]+)/);
-  const context = {
-    pageUri:  window.location.href,
-    pageName: document.title,
-  };
-  
-  if (hutkMatch && hutkMatch[1]) {
-    context.hutk = hutkMatch[1]; // only add if cookie exists
-  }
-  
-  const payload = {
-    fields,
-    context,
-  };
+    const hutkMatch = document.cookie.match(/hubspotutk=([^;]+)/);
+    const context = {
+      pageUri:  window.location.href,
+      pageName: document.title,
+    };
+    if (hutkMatch && hutkMatch[1]) {
+      context.hutk = hutkMatch[1];
+    }
 
-  const portalId = '25480791';
-  const formGuid = 'f9231836-76da-40d9-b48d-8f1281a12faa';
+    const portalId = '25480791';
+    const formGuid = 'f9231836-76da-40d9-b48d-8f1281a12faa';
 
-  fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  })
-    .then((res) => {
-      if (!res.ok) throw new Error('Form submission failed');
-      return res.json();
+    fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fields, context }),
     })
-    .then(() => {
-      const t = T[currentLang];
-      document.querySelector('.success-title').textContent = t.successTitle;
-      document.querySelector('.success-msg').textContent   = t.successMsg;
-      document.getElementById('successOverlay').classList.add('show');
-    })
-    .catch((err) => {
-      console.error('HubSpot form submission error:', err);
-      btn.disabled = false;
-      btn.classList.remove('loading');
-    });
-});
+      .then(res => {
+        if (!res.ok) throw new Error('Form submission failed');
+        return res.json();
+      })
+      .then(() => {
+        const t = T[currentLang];
+        document.querySelector('.success-title').textContent = t.successTitle;
+        document.querySelector('.success-msg').textContent   = t.successMsg;
+        document.getElementById('successOverlay').classList.add('show');
+      })
+      .catch(err => {
+        console.error('HubSpot form submission error:', err);
+        btn.disabled = false;
+        btn.classList.remove('loading');
+      });
+  });
 
   // Init
   setLang('en');
