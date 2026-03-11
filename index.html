@@ -292,7 +292,7 @@
         0 24px 64px rgba(11,31,58,0.38),
         0 4px 16px rgba(11,31,58,0.2);
       position: relative;
-      overflow: hidden;
+      overflow: visible;
     }
 
     .form-card::before {
@@ -301,6 +301,7 @@
       top: 0; left: 0; right: 0;
       height: 4px;
       background: linear-gradient(90deg, var(--gold) 0%, var(--sky) 60%, #7c3aed 100%);
+      border-radius: 24px 24px 0 0;
     }
 
     .form-title {
@@ -319,6 +320,127 @@
     }
 
     .field-group { margin-bottom: 18px; }
+    /* ── PRODUCT MULTI-SELECT ─────────────────────────── */
+    .multiselect-wrap { position: relative; }
+
+    .multiselect-trigger {
+      width: 100%;
+      height: 48px;
+      min-height: 48px;
+      max-height: 48px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 0 12px 0 15px;
+      font-family: 'DM Sans', 'Noto Sans Devanagari', sans-serif;
+      font-size: 15px;
+      color: var(--navy);
+      background: var(--white);
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-sizing: border-box;
+    }
+
+    .multiselect-trigger:focus { outline: none; }
+    .multiselect-trigger.open  { border-color: var(--sky); box-shadow: 0 0 0 4px rgba(45,125,210,0.1); border-radius: 12px 12px 0 0; }
+    .multiselect-trigger.error { border-color: var(--red); box-shadow: 0 0 0 3px rgba(220,38,38,0.08); }
+
+    .multiselect-label {
+      flex: 1;
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #b0b8c8;
+      font-size: 15px;
+    }
+    .multiselect-label.has-value { color: var(--navy); }
+
+    .multiselect-count {
+      display: none;
+      background: var(--sky);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      border-radius: 20px;
+      padding: 2px 7px;
+      flex-shrink: 0;
+    }
+    .multiselect-count.visible { display: inline-block; }
+
+    .multiselect-arrow {
+      width: 16px; height: 16px;
+      stroke: var(--gray);
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .multiselect-trigger.open .multiselect-arrow { transform: rotate(180deg); }
+
+    .multiselect-dropdown {
+      display: none;
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      background: var(--white);
+      border: 1.5px solid var(--sky);
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 8px 24px rgba(11,31,58,0.14);
+      z-index: 999;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+    .multiselect-dropdown.open { display: block; }
+    .multiselect-dropdown::-webkit-scrollbar { width: 5px; }
+    .multiselect-dropdown::-webkit-scrollbar-track { background: var(--light); }
+    .multiselect-dropdown::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+    .ms-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--navy);
+      transition: background 0.15s;
+      border-bottom: 1px solid rgba(214,220,232,0.4);
+    }
+    .ms-option:last-child { border-bottom: none; }
+    .ms-option:hover { background: var(--light); }
+    .ms-option.selected { background: rgba(45,125,210,0.06); }
+
+    .ms-checkbox {
+      width: 17px; height: 17px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s;
+      background: white;
+    }
+    .ms-option.selected .ms-checkbox { background: var(--sky); border-color: var(--sky); }
+    .ms-option.selected .ms-checkbox::after {
+      content: '';
+      display: block;
+      width: 4px; height: 7px;
+      border: 2px solid white;
+      border-top: none; border-left: none;
+      transform: rotate(45deg) translate(-1px,-1px);
+    }
+    .ms-option-icon { font-size: 15px; flex-shrink: 0; }
+    .ms-option-text { flex: 1; line-height: 1.3; }
+
+
 
     .field-label {
       display: block;
@@ -842,6 +964,73 @@
 
       <form id="leadForm" novalidate>
 
+        <!-- Insurance Products Multi-Select -->
+        <div class="field-group">
+          <label class="field-label">
+            <span data-i18n="labelProducts">Which insurance products are you interested in?</span>
+            <span class="req">*</span>
+          </label>
+          <div class="multiselect-wrap" id="msWrap">
+            <button type="button" class="multiselect-trigger" id="msTrigger"
+                    onclick="toggleDropdown()" aria-haspopup="listbox" aria-expanded="false">
+              <span class="multiselect-label" id="msLabel" data-i18n="msPlaceholder">Please select…</span>
+              <span class="multiselect-count" id="msCount"></span>
+              <svg class="multiselect-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="multiselect-dropdown" id="msDropdown" role="listbox" aria-multiselectable="true">
+              <div class="ms-option" data-value="private_health" onclick="toggleOption(this)">
+                <div class="ms-checkbox"></div><span class="ms-option-icon">🏥</span>
+                <span class="ms-option-text" data-i18n="prod1">Private Health Insurance</span>
+              </div>
+              <div class="ms-option" data-value="liability" onclick="toggleOption(this)">
+                <div class="ms-checkbox"></div><span class="ms-option-icon">🛡️</span>
+                <span class="ms-option-text" data-i18n="prod2">Liability Insurance</span>
+              </div>
+              <div class="ms-option" data-value="legal" onclick="toggleOption(this)">
+                <div class="ms-checkbox"></div><span class="ms-option-icon">⚖️</span>
+                <span class="ms-option-text" data-i18n="prod3">Legal Expenses Insurance</span>
+              </div>
+              <div class="ms-option" data-value="dental" onclick="toggleOption(this)">
+                <div class="ms-checkbox"></div><span class="ms-option-icon">🦷</span>
+                <span class="ms-option-text" data-i18n="prod4">Dental Insurance</span>
+              </div>
+              <div class="ms-option" data-value="homeowner" onclick="toggleOption(this)">
+                <div class="ms-checkbox"></div><span class="ms-option-icon">🏠</span>
+                <span class="ms-option-text" data-i18n="prod5">Homeowner Insurance</span>
+              </div>
+              <div class="ms-option" data-value="car" onclick="toggleOption(this)">
+                <div class="ms-checkbox"></div><span class="ms-option-icon">🚗</span>
+                <span class="ms-option-text" data-i18n="prod6">Car Insurance</span>
+              </div>
+              <div class="ms-option" data-value="household" onclick="toggleOption(this)">
+                <div class="ms-checkbox"></div><span class="ms-option-icon">🛋️</span>
+                <span class="ms-option-text" data-i18n="prod7">Household Contents Insurance</span>
+              </div>
+              <div class="ms-option" data-value="income" onclick="toggleOption(this)">
+                <div class="ms-checkbox"></div><span class="ms-option-icon">💼</span>
+                <span class="ms-option-text" data-i18n="prod8">Income Protection Insurance</span>
+              </div>
+              <div class="ms-option" data-value="investment" onclick="toggleOption(this)">
+                <div class="ms-checkbox"></div><span class="ms-option-icon">📈</span>
+                <span class="ms-option-text" data-i18n="prod9">Investment Plan</span>
+              </div>
+              <div class="ms-option" data-value="realestate" onclick="toggleOption(this)">
+                <div class="ms-checkbox"></div><span class="ms-option-icon">🏢</span>
+                <span class="ms-option-text" data-i18n="prod10">Real Estate Investment</span>
+              </div>
+              <div class="ms-option" data-value="pension" onclick="toggleOption(this)">
+                <div class="ms-checkbox"></div><span class="ms-option-icon">🌅</span>
+                <span class="ms-option-text" data-i18n="prod11">Pension Plan</span>
+              </div>
+              <div class="ms-option" data-value="others" onclick="toggleOption(this)">
+                <div class="ms-checkbox"></div><span class="ms-option-icon">➕</span>
+                <span class="ms-option-text" data-i18n="prod12">Others</span>
+              </div>
+            </div>
+          </div>
+          <div class="field-error" id="productsError" data-i18n="errProducts">Please select at least one product.</div>
+        </div>
+
         <!-- Name -->
         <div class="field-group">
           <label class="field-label" for="name">
@@ -1021,6 +1210,22 @@
       trust3: "GDPR compliant",        trust4: "Reply within 24h",
       formTitle:    "Get your free quote",
       formSub:      "Leave your details — our team gets back to you within one business day.",
+      labelProducts: "Which insurance products are you interested in?",
+      msPlaceholder: "Please select…",
+      errProducts:   "Please select at least one product.",
+      msSelected:    "{n} products selected",
+      prod1:  "Private Health Insurance",
+      prod2:  "Liability Insurance",
+      prod3:  "Legal Expenses Insurance",
+      prod4:  "Dental Insurance",
+      prod5:  "Homeowner Insurance",
+      prod6:  "Car Insurance",
+      prod7:  "Household Contents Insurance",
+      prod8:  "Income Protection Insurance",
+      prod9:  "Investment Plan",
+      prod10: "Real Estate Investment",
+      prod11: "Pension Plan",
+      prod12: "Others",
       labelName:    "Your Name",       phName:  "First and last name",
       labelContact: "Preferred Contact",
       tabPhone:     "Phone",           tabEmail: "Email",
@@ -1053,6 +1258,22 @@
       trust3: "DSGVO-konform",        trust4: "Rückmeldung in 24h",
       formTitle:    "Angebot anfordern",
       formSub:      "Einfach Kontaktdaten hinterlassen – unser Team meldet sich innerhalb eines Werktages.",
+      labelProducts: "Für welche Versicherungsprodukte interessieren Sie sich?",
+      msPlaceholder: "Bitte auswählen…",
+      errProducts:   "Bitte wählen Sie mindestens ein Produkt aus.",
+      msSelected:    "{n} Produkte ausgewählt",
+      prod1:  "Private Krankenversicherung",
+      prod2:  "Haftpflichtversicherung",
+      prod3:  "Rechtsschutzversicherung",
+      prod4:  "Zahnzusatzversicherung",
+      prod5:  "Wohngebäudeversicherung",
+      prod6:  "Kfz-Versicherung",
+      prod7:  "Hausratversicherung",
+      prod8:  "Berufsunfähigkeitsversicherung",
+      prod9:  "Investitionsplan",
+      prod10: "Immobilieninvestition",
+      prod11: "Rentenversicherung",
+      prod12: "Sonstiges",
       labelName:    "Ihr Name",        phName: "Vor- und Nachname",
       labelContact: "Kontaktart",
       tabPhone:     "Telefon",         tabEmail: "E-Mail",
@@ -1085,6 +1306,22 @@
       trust3: "GDPR अनुपालन",      trust4: "24 घंटे में जवाब",
       formTitle:    "मुफ़्त कोटेशन पाएँ",
       formSub:      "अपनी संपर्क जानकारी छोड़ें — हमारी टीम एक कार्यदिवस में आपसे संपर्क करेगी।",
+      labelProducts: "आप किन बीमा उत्पादों में रुचि रखते हैं?",
+      msPlaceholder: "कृपया चुनें…",
+      errProducts:   "कृपया कम से कम एक उत्पाद चुनें।",
+      msSelected:    "{n} उत्पाद चुने गए",
+      prod1:  "प्राइवेट स्वास्थ्य बीमा",
+      prod2:  "देयता बीमा",
+      prod3:  "कानूनी खर्च बीमा",
+      prod4:  "दंत बीमा",
+      prod5:  "गृहस्वामी बीमा",
+      prod6:  "कार बीमा",
+      prod7:  "घरेलू सामग्री बीमा",
+      prod8:  "आय सुरक्षा बीमा",
+      prod9:  "निवेश योजना",
+      prod10: "रियल एस्टेट निवेश",
+      prod11: "पेंशन योजना",
+      prod12: "अन्य",
       labelName:    "आपका नाम",     phName: "पूरा नाम",
       labelContact: "संपर्क माध्यम",
       tabPhone:     "फ़ोन",         tabEmail: "ईमेल",
@@ -1109,6 +1346,62 @@
     },
   };
 
+  // ── MULTI-SELECT ──────────────────────────────────────
+  let selectedProducts = [];
+
+  function toggleDropdown() {
+    const trigger  = document.getElementById('msTrigger');
+    const dropdown = document.getElementById('msDropdown');
+    const isOpen   = dropdown.classList.contains('open');
+    trigger.classList.toggle('open', !isOpen);
+    dropdown.classList.toggle('open', !isOpen);
+    trigger.setAttribute('aria-expanded', String(!isOpen));
+  }
+
+  function toggleOption(el) {
+    const val = el.getAttribute('data-value');
+    const idx = selectedProducts.indexOf(val);
+    if (idx === -1) { selectedProducts.push(val); el.classList.add('selected'); }
+    else            { selectedProducts.splice(idx, 1); el.classList.remove('selected'); }
+    updateTriggerLabel();
+  }
+
+  function updateTriggerLabel() {
+    const label = document.getElementById('msLabel');
+    const count = document.getElementById('msCount');
+    const t = T[currentLang];
+    if (selectedProducts.length === 0) {
+      label.textContent = t.msPlaceholder;
+      label.classList.remove('has-value');
+      count.classList.remove('visible');
+    } else if (selectedProducts.length === 1) {
+      // Show the single product name
+      const opt = document.querySelector('[data-value="' + selectedProducts[0] + '"] .ms-option-text');
+      label.textContent = opt ? opt.textContent.trim() : selectedProducts[0];
+      label.classList.add('has-value');
+      count.classList.remove('visible');
+    } else {
+      // Show compact count summary — never grows the trigger
+      label.textContent = t.msSelected.replace('{n}', selectedProducts.length);
+      label.classList.add('has-value');
+      count.textContent = selectedProducts.length;
+      count.classList.add('visible');
+    }
+    if (selectedProducts.length > 0) {
+      document.getElementById('productsError').classList.remove('visible');
+      document.getElementById('msTrigger').classList.remove('error');
+    }
+  }
+
+  // Close on outside click
+  document.addEventListener('click', function(e) {
+    const wrap = document.getElementById('msWrap');
+    if (wrap && !wrap.contains(e.target)) {
+      document.getElementById('msTrigger').classList.remove('open');
+      document.getElementById('msDropdown').classList.remove('open');
+    }
+  });
+
   let currentLang = 'en';
   let activeTab = 'email';
 
@@ -1131,6 +1424,8 @@
         }
       }
     });
+    updateTriggerLabel();
+
     document.querySelectorAll('[data-ph]').forEach(el => {
       const key = el.getAttribute('data-ph');
       if (t[key]) el.placeholder = t[key];
@@ -1157,6 +1452,13 @@
     let valid = true;
     clearErrors();
     const t = T[currentLang];
+    if (selectedProducts.length === 0) {
+      document.getElementById('productsError').textContent = t.errProducts;
+      document.getElementById('productsError').classList.add('visible');
+      document.getElementById('msTrigger').classList.add('error');
+      valid = false;
+    }
+
     const name = document.getElementById('name').value.trim();
     if (name.length < 2) {
       document.getElementById('nameError').textContent = t.errName;
@@ -1214,6 +1516,7 @@
       { name: 'lead_language', value: currentLang },
       { name: 'lead_date',     value: new Date().toISOString() },
       { name: 'lead_source',   value: 'neodirect_expat_lead_sunil' },
+      { name: 'products_interest', value: selectedProducts.join(', ') },
     ];
 
     const hutkMatch = document.cookie.match(/hubspotutk=([^;]+)/);
