@@ -5,11 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Insurance Help for Expats in Germany | Free English Advice – NEOdirect</title>
   <meta name="description" content="Free insurance consultation for expats and newcomers in Germany. Compare health, liability, legal, dental and more — in English, German or Hindi. Powered by NEOdirect." />
-  <meta name="keywords" content="insurance for expats Germany, English speaking insurance advisor Germany, 
-    health insurance Germany newcomers, liability insurance Germany expats, insurance for Blue Card holders Germany, 
-    Indian expats insurance Germany, financial planning expats Germany,
-    insurance for expats, Free Insurance, Insurance for Indians, Hindi Speaking insurance Germany, Health Insurance,
-    beneficial, high quality insurance for indians in germany"/>
+  <meta name="keywords" content="insurance for expats Germany, English speaking insurance advisor Germany, health insurance Germany newcomers, liability insurance Germany expats, insurance for Blue Card holders Germany, Indian expats insurance Germany, financial planning expats Germany" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://neodirect.github.io/expat-insurance/" />
 
@@ -197,7 +193,7 @@
       position: relative;
       overflow: hidden;
       min-height: 100vh;
-      padding-top: 56px;
+      padding-top: 0;
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
@@ -1004,7 +1000,8 @@
     .features {
       background: var(--white);
       border-top: 1px solid rgba(11,31,58,0.06);
-      padding: 52px 80px;
+      padding: 32px 80px 28px;
+      padding-top: calc(56px + 32px);
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 32px;
@@ -1126,7 +1123,7 @@
       .hero { grid-template-columns: 1fr; min-height: auto; }
       .hero-left  { padding: 60px 32px 40px; }
       .hero-right { padding: 0 32px 60px; }
-      .features   { grid-template-columns: 1fr 1fr; padding: 40px 32px; gap: 24px; }
+      .features   { grid-template-columns: 1fr 1fr; padding: 40px 32px 28px; padding-top: calc(56px + 28px); gap: 24px; }
       .expat-banner { padding: 36px 32px; flex-direction: column; gap: 20px; }
       .lang-bar   { padding: 10px 24px; }
       .consultant-img { height: 300px; }
@@ -1136,7 +1133,7 @@
       .hero-left  { padding: 48px 20px 32px; }
       .hero-right { padding: 0 20px 48px; }
       .form-card  { padding: 36px 24px; }
-      .features   { grid-template-columns: 1fr; padding: 32px 20px; }
+      .features   { grid-template-columns: 1fr; padding: 32px 20px 24px; padding-top: calc(56px + 24px); }
       .expat-banner { padding: 28px 20px; }
       .lang-btn .flag { display: none; }
       .consultant-img { height: 200px; }
@@ -1149,6 +1146,7 @@
 
     /* ── FOOTER ────────────────────────────────────────── */
     .site-footer {
+      display: none;
       background: var(--navy);
       border-top: 1px solid rgba(200,150,62,0.12);
       padding: 28px 40px;
@@ -1220,7 +1218,7 @@
   </div>
 </nav>
 
-  <!-- ── FEATURES ──────────────────────────────────────────── -->
+<!-- ── FEATURES ──────────────────────────────────────────── -->
 <div class="features">
   <div class="feature">
     <div class="feature-icon">
@@ -1261,7 +1259,7 @@
 </div>
 
 
-  
+
 <!-- ── HERO ─────────────────────────────────────────────── -->
 <section class="hero">
   <div class="ring2"></div>
@@ -1518,47 +1516,6 @@
   </div>
 </div>
 
-<!-- ── FEATURES ──────────────────────────────────────────── 
-<div class="features">
-  <div class="feature">
-    <div class="feature-icon">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-    </div>
-    <div class="feature-text">
-      <h4 data-i18n="feat1h">Fast Response</h4>
-      <p data-i18n="feat1p">We call or email you within 24 hours on any working day.</p>
-    </div>
-  </div>
-  <div class="feature">
-    <div class="feature-icon">
-      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-    </div>
-    <div class="feature-text">
-      <h4 data-i18n="feat2h">Personal Advisor</h4>
-      <p data-i18n="feat2p">Real experts — no chatbots — analyse your specific expat needs.</p>
-    </div>
-  </div>
-  <div class="feature">
-    <div class="feature-icon">
-      <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-    </div>
-    <div class="feature-text">
-      <h4 data-i18n="feat3h">100% Free</h4>
-      <p data-i18n="feat3p">Our consultation is completely non-binding and free of charge.</p>
-    </div>
-  </div>
-  <div class="feature">
-    <div class="feature-icon">
-      <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-    </div>
-    <div class="feature-text">
-      <h4 data-i18n="feat4h">300+ Plans Compared</h4>
-      <p data-i18n="feat4p">We scan all leading German insurers for the best value for you.</p>
-    </div>
-  </div>
-</div> -->
-
-
 <!-- ── HOW INSURANCE WORKS ──────────────────────────────── -->
 <section class="content-section" id="how-it-works">
   <div class="section-inner">
@@ -1749,7 +1706,7 @@
   </div>
 </section>
 
-<!-- ── FOOTER ────────────────────────────────────────────── 
+<!-- ── FOOTER ────────────────────────────────────────────── -->
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-brand">
@@ -1764,7 +1721,7 @@
       <a href="https://neodirect.de/datenschutz" target="_blank" rel="noopener" class="footer-link" data-i18n="footerPrivacy">Privacy Policy</a>
     </div>
   </div>
-</footer> -->
+</footer>
 
 <script>
   const T = {
