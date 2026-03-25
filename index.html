@@ -2205,13 +2205,14 @@
         ? email
         : 'email@noexist.org';
 
+    const lead_source = 'neodirect_expat_lead_sunil_' + urlRef
     const fields = [
       { name: 'firstname',     value: firstname },
       { name: 'phone',         value: (activeTab === 'tel' ? tel : email) },
       { name: 'email',         value: hubspotEmail },
       { name: 'lead_language', value: currentLang },
       { name: 'lead_date',     value: new Date().toISOString() },
-      { name: 'lead_source',   value: 'neodirect_expat_lead_sunil' },
+      { name: 'lead_source',   value: lead_source },
       { name: 'products_interest', value: selectedProducts.join(', ') },
     ];
 
@@ -2255,6 +2256,9 @@
     item.classList.toggle('open');
   }
 
+  // ── REF PARAMETER ─────────────────────────────────────
+  // Reads ?ref=name from URL — each friend gets their own link/QR code
+  const urlRef = new URLSearchParams(window.location.search).get('ref') || 'direct';
   // Init
   setLang('en');
 </script>
